@@ -1,0 +1,30 @@
+.summary-card {
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 30px);
+    min-height: auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 10px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    .summary-card-header {
+        text-align: right;
+    }
+    
+    .summary-card-item {
+        align-self: start;
+        text-align: start;
+
+        .key {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+    }
+}

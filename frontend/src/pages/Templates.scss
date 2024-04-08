@@ -1,0 +1,47 @@
+.home-page-container {
+  color: black;
+  background-color: #e6e6eb;
+
+  .template {
+    padding: 1rem;
+    position: relative;
+    
+    .templates-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .template-footer {
+      position: absolute;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+      width: 98%;
+
+      .template-input {
+        width: 50rem;
+        position: relative;
+
+        input {
+          width: 100%;
+          border-radius: 1rem;
+          outline-color: #ebebeb;
+          padding: 1rem;
+        }
+
+        button {
+          position: absolute;
+          transform: translateX(-35px);
+          height: 100%;
+        }
+      }
+    }
+      
+
+  }
+
+}
+

@@ -1,0 +1,71 @@
+version: '3.8'
+services:
+
+## Backend
+  api:
+    build: backend
+    container_name: learngpt-api
+    volumes:
+      - ./backend:/backend
+    ports:
+      - '5001:5001'
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+    env_file:
+      - .env
+    depends_on:
+      - mongo-db
+    restart: unless-stopped
+      
+  ## Frontend
+  frontend:
+    build: frontend
+    container_name: learngpt-frontend
+    volumes:
+      - ./frontend:/app
+      - node_modules:/app/node_modules
+    ports:
+      - '5173:5173'
+    depends_on:
+      - api
+    environment:
+      - NODE_ENV=development
+    restart: unless-stopped
+
+  ## Database
+  mongo-db:
+    image: mongo
+    container_name: mongo
+    volumes:
+      - mongo_data:/data/db
+      - mongo_config:/data/configdb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    restart: unless-stopped
+    ports:
+      - 27017:27017
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+      ME_CONFIG_BASICAUTH_USERNAME: learngpt
+      ME_CONFIG_BASICAUTH_PASSWORD: learngpt
+      ME_CONFIG_MONGODB_SERVER: mongo-db
+    restart: unless-stopped
+    depends_on:
+      - mongo-db
+
+volumes:
+  node_modules:
+    driver: local
+  mongo_data:
+    driver: local
+  mongo_config:
+    driver: local

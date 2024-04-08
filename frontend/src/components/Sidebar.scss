@@ -1,0 +1,42 @@
+.sidebar-container {
+  color: white;
+  background-color: #1E1E1E;
+  border-right: 1px solid #e0e0e0;
+  height: 100vh;
+
+  .sidebar-input {
+    border-bottom: white 1px solid;
+
+    input {
+      outline: none;
+      background-color: #1E1E1E;
+    }
+  }
+
+  .sidebar-item {
+    margin-bottom: 0.75rem;
+    border-left: #e6e6eb 1px solid;
+    padding-left: 1rem;
+    text-align: left;
+  }
+  
+  .sidebar-footer a {
+    position: relative;
+    align-items: center;
+  }
+  
+  .sidebar-footer a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #e6e6eb; /* Change to the color you want for the underline */
+    transition: width .3s;
+  }
+  
+  .sidebar-footer a:hover::after {
+    width: 100%;
+  }
+}

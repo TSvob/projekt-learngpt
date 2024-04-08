@@ -1,0 +1,34 @@
+[
+    {
+      "_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+      "first_name": "Test",
+      "last_name": "Test",
+      "email": "test@test.com",
+      "password": "test",
+      "created_at": "2022-01-01T00:00:00Z"
+    },
+    {
+      "_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "email": "janesmith@example.com",
+      "password": "password456",
+      "created_at": "2022-01-02T00:00:00Z"
+    },
+    {
+      "_id": "0c4e8f3a-8a8e-4e0e-9a5c-3d8b9b9a4e9e",
+      "first_name": "Alice",
+      "last_name": "Johnson",
+      "email": "alicejohnson@example.com",
+      "password": "password789",
+      "created_at": "2022-01-03T00:00:00Z"
+    },
+    {
+      "_id": "d6b0e7e7-9e5f-4e9d-8a2f-3e8e9e8e7e6e",
+      "first_name": "Bob",
+      "last_name": "Williams",
+      "email": "bobwilliams@example.com",
+      "password": "passwordabc",
+      "created_at": "2022-01-04T00:00:00Z"
+    }
+]

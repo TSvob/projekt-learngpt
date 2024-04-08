@@ -1,0 +1,53 @@
+[
+  {
+  "_id": "b04fddbf-23c7-4ad3-920d-c7274c70098e",
+  "author_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+  "created_at": "2019-01-01T00:00:00.000Z",
+  "template_list": [
+    {
+      "_id": "f5849fc2-92d9-41e4-a658-8728cbec23f3",
+      "template_name": "Library",
+      "template_topic": "Books",
+      "fields": ["book_name", "author", "summary", "genre"],
+      "summaries": [
+        {
+          "_id": "2244bf88-2c61-4bf4-aaf8-ca7f565e5954",
+          "created_at": "2019-01-01T00:00:00.000Z",
+          "data": {
+            "book_name": "The Hobbit",
+            "author": "J.R.R. Tolkien",
+            "summary": "The Hobbit follows the quest of Bilbo Baggins, a reluctant hero who embarks on an adventurous journey to help a group of dwarves reclaim their homeland from the dragon Smaug.",
+            "genre": "Fantasy"
+        }},
+        {
+          "_id": "2244bf88-2c61-4bf4-aaf8-ca7f565e5954",
+          "created_at": "2019-01-01T00:00:00.000Z",
+          "data": {
+            "book_name": "1984",
+            "author": "George Orwell",
+            "summary": "A dystopian novel about a society under total surveillance.",
+            "genre": "Dystopian Fiction"
+          }}
+      ]
+    },
+    {
+        "_id": "30baeb2d-bada-4f8a-bb86-a4dcc12c0ea2",
+        "template_name": "Library2",
+        "template_topic": "Books",
+        "fields": ["book_name", "author", "summary", "genre", "release_date"],
+        "summaries": [
+          {
+            "_id": "2244bf88-2c61-4bf4-aaf8-ca7f565e5954",
+            "created_at": "2019-01-01T00:00:00.000Z",
+            "data": {
+              "book_name": "Lord of the Rings",
+              "author": "J.R.R. Tolkien",
+              "summary": "A hobbit, a wizard, and a fellowship of diverse beings embark on a journey to defeat the Dark Lord Sauron and destroy the One Ring.",
+              "genre": "Fantasy",
+              "release_date": "2002"
+          }}
+        ]
+    }
+  ]
+}
+]
