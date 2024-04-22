@@ -2,6 +2,7 @@ import "./Registration.scss";
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
 import { RegistrationFormInterface } from "../interfaces/register-form-interface";
 
 const Registration: React.FC = () => {
@@ -14,6 +15,7 @@ const Registration: React.FC = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -21,45 +23,60 @@ const Registration: React.FC = () => {
   };
 
   const validateForm = (): string | null => {
-    const { firstName, lastName, email, password, passwordConfirmation } = formState;
-
+    const { firstName, lastName, email, password, passwordConfirmation } =
+      formState;
     if (!firstName) {
-      window.alert("Nejsou vyplněna všechna pole");
+      enqueueSnackbar("Nejsou vyplněna všechna pole", { variant: "error" });
       return "Nejsou vyplněna všechna pole";
     } else if (firstName.length < 3 || firstName.length > 10) {
-      window.alert("Křestní jméno musí být mezi 3 a 10 znaky dlouhé");
+      enqueueSnackbar("Křestní jméno musí být mezi 3 a 10 znaky dlouhé", {
+        variant: "error",
+      });
       return "Křestní jméno musí být mezi 3 a 10 znaky dlouhé";
     }
 
     if (!lastName) {
-      window.alert("Nejsou vyplněna všechna pole");
+      enqueueSnackbar("Nejsou vyplněna všechna pole", { variant: "error" });
       return "Nejsou vyplněna všechna pole";
     } else if (lastName.length < 3 || lastName.length > 10) {
-      window.alert("Příjmení musí být mezi 3 a 10 znaky dlouhé");
+      enqueueSnackbar("Příjmení musí být mezi 3 a 10 znaky dlouhé", {
+        variant: "error",
+      });
       return "Příjmení musí být mezi 3 a 10 znaky dlouhé";
     }
 
     if (!email) {
-      window.alert("Nejsou vyplněna všechna pole");
+      enqueueSnackbar("Nejsou vyplněna všechna pole", { variant: "error" });
       return "Nejsou vyplněna všechna pole";
     } else if (email.length < 3 || email.length > 30) {
-      window.alert("Email musí být mezi 3 a 30 znaky dlouhý");
+      enqueueSnackbar("Email musí být mezi 3 a 30 znaky dlouhý", {
+        variant: "error",
+      });
       return "Email musí být mezi 3 a 30 znaky dlouhý";
     }
 
     if (!password) {
-      window.alert("Nejsou vyplněna všechna pole");
+      enqueueSnackbar("Nejsou vyplněna všechna pole", { variant: "error" });
       return "Nejsou vyplněna všechna pole";
-    } else if (password.length < 6 || password.length > 30 || !/\d/.test(password)) {
-      window.alert("Heslo musí být mezi 6 a 30 znaky dlouhé a obsahovat alespoň jedno číslo");
+    } else if (
+      password.length < 6 ||
+      password.length > 30 ||
+      !/\d/.test(password)
+    ) {
+      enqueueSnackbar(
+        "Heslo musí být mezi 6 a 30 znaky dlouhé a obsahovat alespoň jedno číslo",
+        { variant: "error" }
+      );
       return "Heslo musí být mezi 6 a 30 znaky dlouhé a obsahovat alespoň jedno číslo";
     }
 
     if (!passwordConfirmation) {
-      window.alert("Nejsou vyplněna všechna pole");
+      enqueueSnackbar("Nejsou vyplněna všechna pole", { variant: "error" });
       return "Nejsou vyplněna všechna pole";
     } else if (password !== passwordConfirmation) {
-      window.alert("Heslo a potvrzení hesla se neshodují");
+      enqueueSnackbar("Heslo a potvrzení hesla se neshodují", {
+        variant: "error",
+      });
       return "Heslo a potvrzení hesla se neshodují";
     }
 
@@ -77,9 +94,11 @@ const Registration: React.FC = () => {
 
     try {
       await axios.post("http://127.0.0.1:5001/api/register", formState);
+      enqueueSnackbar("Registrace proběhla úspěšně", { variant: "success" });
       navigate("/login");
     } catch (error) {
       if (axios.isAxiosError(error)) {
+        enqueueSnackbar("Registrace se nezdařila", { variant: "error" });
         if (error.response) {
           console.error("Registration failed", error.response.data);
         } else if (error.request) {

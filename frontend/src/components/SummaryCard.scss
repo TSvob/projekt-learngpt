@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     width: calc(50% - 30px);
+    height: fit-content;
     min-height: auto;
     background-color: #fff;
     border-radius: 10px;
@@ -12,10 +13,15 @@
     cursor: pointer;
     &:hover {
         transform: scale(1.05);
+        cursor: default;
     }
 
     .summary-card-header {
         text-align: right;
+
+        button {
+            padding: 0px 2px;
+        }
     }
     
     .summary-card-item {
