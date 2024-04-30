@@ -100,7 +100,7 @@ const TemplateModal: React.FC<Props> = ({
           type="text"
           value={fields}
           onChange={(e) => setFields(e.target.value)}
-          placeholder="Zajimave udaje"
+          placeholder="Zajímavé údaje"
           className="w-full mb-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#1E1E1E]"
         />
         <span className="flex">

@@ -152,7 +152,7 @@ def get_summaries(author_id, template_id):
             for template in template_list:
                 if template['_id'] == template_id:
                     summaries = template.get('summaries', [])
-                    return jsonify(json_util.loads(json_util.dumps(summaries)))
+                    return jsonify(summaries)
         return jsonify([]), 200
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
