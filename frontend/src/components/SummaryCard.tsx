@@ -7,7 +7,7 @@ import "./SummaryCard.scss";
 interface SummaryItem {
   _id: string;
   created_at: string;
-  data: any;
+  data: Record<string, string>;
 }
 
 type SummaryCardProps = {

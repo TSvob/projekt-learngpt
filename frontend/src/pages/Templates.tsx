@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useUser } from "../contexts/useUser";
@@ -13,12 +14,12 @@ import "./Templates.scss";
 const Templates = () => {
   const { user } = useUser();
   const { enqueueSnackbar } = useSnackbar();
-  const [templates, setTemplates] = useState<TemplateInterface>();
+  const [templates, setTemplates] = useState<TemplateInterface[]>([]);
   const [activeTemplateId, setActiveTemplateId] = useState<string>("");
   const [summaries, setSummaries] = useState<SummaryInterface[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [input, setInput] = useState("");
-  const [summaryResponse, setSummaryResponse] = useState("");
+  const [,setSummaryResponse] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
