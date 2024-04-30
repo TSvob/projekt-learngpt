@@ -1,20 +1,16 @@
 import axios from "axios";
 import { useSnackbar } from "notistack";
 import { useUser } from "../contexts/useUser";
+import { SummaryData } from "../interfaces/summary-data-interface";
+import { SummaryInterface } from "../interfaces/summary-interface";
 
 import "./SummaryCard.scss";
 
-interface SummaryItem {
-  _id: string;
-  created_at: string;
-  data: Record<string, string>;
-}
-
-type SummaryCardProps = {
-  summary: SummaryItem;
+interface SummaryCardProps {
+  summary: SummaryInterface;
   templateId: string;
   refreshSummaries: () => void;
-};
+}
 
 const SummaryCard: React.FC<SummaryCardProps> = ({
   summary,
@@ -49,12 +45,10 @@ const SummaryCard: React.FC<SummaryCardProps> = ({
         </button>
       </div>
       <div className="summary-card-item">
-        {Object.entries(summary.data).map(([key, value]) => (
-          <p key={key}>
-            <span className="key">{key}:</span>{" "}
-            <span className="value">
-              {typeof value === "object" ? JSON.stringify(value) : value}
-            </span>
+        {summary.data.map((item: SummaryData, index: number) => (
+          <p key={index}>
+            <span className="key">{item.key}:</span>{" "}
+            <span className="value">{item.value}</span>
           </p>
         ))}
       </div>

@@ -152,7 +152,18 @@ def get_summaries(author_id, template_id):
             for template in template_list:
                 if template['_id'] == template_id:
                     summaries = template.get('summaries', [])
-                    return jsonify(summaries)
+                    formatted_summaries = []
+                    for summary in summaries:
+                        formatted_data = []
+                        for key, value in summary['data'].items():
+                            formatted_data.append({'key': key, 'value': value})
+                        formatted_summary = {
+                            '_id': summary['_id'],
+                            'created_at': summary['created_at'],
+                            'data': formatted_data
+                        }
+                        formatted_summaries.append(formatted_summary)
+                    return jsonify(formatted_summaries)
         return jsonify([]), 200
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
