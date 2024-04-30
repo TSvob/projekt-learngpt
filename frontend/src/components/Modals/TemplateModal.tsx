@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useUser } from "../../contexts/useUser";
+import { useSnackbar } from "notistack";
 
 import "./TemplateModal.scss";
 
@@ -16,6 +17,7 @@ const TemplateModal: React.FC<Props> = ({
   refreshTemplates,
 }) => {
   const { user } = useUser();
+  const { enqueueSnackbar } = useSnackbar();
   const [templateName, setTemplateName] = useState("");
   const [template_topic, setTemplateTopic] = useState("");
   const [fields, setFields] = useState("");
@@ -54,13 +56,16 @@ const TemplateModal: React.FC<Props> = ({
             refreshTemplates();
           }
           onClose();
+          enqueueSnackbar("Nová šablona vytvořena", { variant: "success" });
         } else {
           console.log(response)
           console.log("Request failed with status code:", response.status);
+          enqueueSnackbar("Chyba při vytváření šablony", { variant: "error" });
         }
       })
     } catch (error) {
       console.error("Error:", error);
+      enqueueSnackbar("Chyba při vytváření šablony", { variant: "error" });
     }
   };
 
@@ -95,7 +100,7 @@ const TemplateModal: React.FC<Props> = ({
           type="text"
           value={fields}
           onChange={(e) => setFields(e.target.value)}
-          placeholder="Zajimave udaje"
+          placeholder="Zajímavé údaje"
           className="w-full mb-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:border-[#1E1E1E]"
         />
         <span className="flex">

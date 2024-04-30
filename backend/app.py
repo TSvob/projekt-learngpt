@@ -113,7 +113,8 @@ def register():
         "created_at": created_at,
         "template_list": []
     }
-    
+
+
     templates_collection.insert_one(new_template)
 
     return {"msg": "User created successfully"}, 201
@@ -145,20 +146,25 @@ def get_template_names():
 @app.route('/api/get-summaries/<author_id>/<template_id>', methods=['GET'])
 def get_summaries(author_id, template_id):
     try:
-        # Query to find the document with the matching author_id
         users_templates = templates_collection.find_one({"author_id": author_id})
-
         if users_templates:
-            # Extracting the template_list
             template_list = users_templates.get('template_list', [])
             for template in template_list:
                 if template['_id'] == template_id:
                     summaries = template.get('summaries', [])
-                    # Using json_util.dumps to handle MongoDB specific data types (like ObjectId, ISODate)
-                    summaries_json = [json_util.dumps(summary) for summary in summaries]
-                    return jsonify(summaries_json)
-        return jsonify([]), 200  # Return an empty list if no matching document or template is found
-
+                    formatted_summaries = []
+                    for summary in summaries:
+                        formatted_data = []
+                        for key, value in summary['data'].items():
+                            formatted_data.append({'key': key, 'value': value})
+                        formatted_summary = {
+                            '_id': summary['_id'],
+                            'created_at': summary['created_at'],
+                            'data': formatted_data
+                        }
+                        formatted_summaries.append(formatted_summary)
+                    return jsonify(formatted_summaries)
+        return jsonify([]), 200
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
@@ -258,6 +264,27 @@ def new_summary():
     except Exception as e:
         print("Exception occurred:", str(e))  # Print the exception message
         print("Traceback:", traceback.format_exc())  # Print the exception traceback
+        return jsonify({"status": "error", "message": str(e)}), 500
+    
+@app.route('/api/delete-summary/', methods=['DELETE'])
+def delete_summary():
+    data = request.get_json()
+    author_id = data.get('author_id')
+    template_id = data.get('template_id')
+    summary_id = data.get('summary_id')
+    print(f"Attempting to delete summary with ID {summary_id} from template {template_id} created by author {author_id}")
+    try:
+        result = templates_collection.update_one(
+        {'author_id': author_id, 'template_list._id': template_id},
+        {'$pull': {'template_list.$.summaries': {'_id': summary_id}}}
+    )
+        
+        if result.modified_count:
+            return jsonify({'success': 'Summary deleted'}), 200
+        else:
+            return jsonify({'error': 'No summary found with provided IDs'}), 404
+
+    except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
         
 if __name__ =='__main__':

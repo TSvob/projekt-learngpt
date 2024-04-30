@@ -1,21 +1,24 @@
 .summary-card {
     display: flex;
     flex-direction: column;
-    width: calc(50% - 30px);
     min-height: auto;
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin: 10px;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
     &:hover {
         transform: scale(1.05);
+        cursor: default;
     }
 
     .summary-card-header {
         text-align: right;
+
+        button {
+            padding: 0px 2px;
+        }
     }
     
     .summary-card-item {

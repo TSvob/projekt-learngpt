@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../contexts/useUser";
+import { useSnackbar } from "notistack";
 
 import "./LoginPage.scss";
 import { LoginFormInterface } from "@/interfaces/login-form-interface";
@@ -9,6 +10,7 @@ import { LoginFormInterface } from "@/interfaces/login-form-interface";
 const LoginPage: React.FC = () => {
   const { token, setToken, setUser } = useUser();
   const [showPassword, setShowPassword] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
   const [formState, setFormState] = useState<LoginFormInterface>({
     email: "",
     password: "",
@@ -41,6 +43,7 @@ const LoginPage: React.FC = () => {
       navigate("/");
     } catch (error) {
       if (axios.isAxiosError(error)) {
+        enqueueSnackbar("Přihlášení se nezdařilo", { variant: "error" });
         if (error.response) {
           console.error("Login failed", error.response.data);
         } else if (error.request) {

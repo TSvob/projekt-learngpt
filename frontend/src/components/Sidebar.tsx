@@ -30,7 +30,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                 key={template.id}
                 className="sidebar-item flex justify-between truncate"
               >
-                <button onClick={() => setActiveTemplateId(template.id)}>
+                <button className="sidebar-item-name" onClick={() => setActiveTemplateId(template.id)}>
                   {template.template_name}
                 </button>
                 <button className="sidebar-item-edit-button">

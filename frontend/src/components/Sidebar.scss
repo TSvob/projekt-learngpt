@@ -18,6 +18,12 @@
     border-left: #e6e6eb 1px solid;
     padding-left: 1rem;
     text-align: left;
+
+    .sidebar-item-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
   }
   
   .sidebar-footer a {

@@ -1,3 +1,4 @@
 export interface SummaryData {
-  [key: string]: string;
+  key: string;
+  value: string;
 }
